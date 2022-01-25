@@ -39,6 +39,13 @@ const FormProvider = ({ children }) => {
     });
   }, []);
 
+  const resetFormstate = () => {
+    dispatch({
+      type: actionName.RESET_FORM_STATE,
+      payload: init,
+    });
+  };
+
   const handleChangeVariant = (e) => {
     const filedName = e.target.name;
     const newSelectVariant = formState.allVariants.filter(
@@ -97,6 +104,7 @@ const FormProvider = ({ children }) => {
         handleChange,
         handleLoadmoreOption,
         handleChangeVariant,
+        resetFormstate,
       }}
     >
       {children}

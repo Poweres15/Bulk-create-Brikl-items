@@ -2,7 +2,7 @@ import { queryName, actionName } from "../constant/constant";
 import optionalDetailGQL from "./optionalGQL";
 import BriklGQL from "./baesGQL";
 
-const createProductGQL = async (formState) => {
+export const createProductGQL = async (formState) => {
   const { token, shopid, nameUS, internalID, price, isActive } = formState;
   // Default price = 0
   const productPrice = price === "" ? 0 : parseInt(price);
@@ -43,14 +43,14 @@ export const requestGQLs = async (formState, dispatch) => {
 
     await optionalDetailGQL(formState, productID, dispatch);
 
-    const deletedResp = await deleteProductGQL(formState, productID);
+    // const deletedResp = await deleteProductGQL(formState, productID);
 
-    if (!deletedResp.success) {
-      dispatch({
-        type: actionName.ADD_MESSAGE,
-        payload: { showMessage: deletedResp.message, type: "error" },
-      });
-    }
+    // if (!deletedResp.success) {
+    //   dispatch({
+    //     type: actionName.ADD_MESSAGE,
+    //     payload: { showMessage: deletedResp.message, type: "error" },
+    //   });
+    // }
 
     // Prevent condition to hit create product Error
     return;

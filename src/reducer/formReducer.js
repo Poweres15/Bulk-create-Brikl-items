@@ -38,5 +38,9 @@ export default function reducer(state, action) {
     return { ...state, allSaleChannel: action.payload };
   }
 
+  if (action.type === actionName.RESET_FORM_STATE) {
+    return { ...state, ...action.payload };
+  }
+
   return state;
 }

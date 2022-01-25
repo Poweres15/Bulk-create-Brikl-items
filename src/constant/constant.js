@@ -28,6 +28,7 @@ export const actionName = {
   RUN_LOADING_LOADMORE: "runLoadingLoadMore",
   STOP_LOADING_LOADMORE: "stopLoadingLoadMore",
   ADD_ALL_SALE_CHANNEL: "addAllSaleChannels",
+  RESET_FORM_STATE: "resetFormState",
 };
 
 export const queryInfo = {
