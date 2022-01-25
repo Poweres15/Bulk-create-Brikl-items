@@ -1,7 +1,6 @@
-import React, { UseEffect } from "react";
+import React, { useEffect } from "react";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import { useEffect } from "react/cjs/react.development";
 
 const ManualMethod = ({
   handleChange,
