@@ -1,5 +1,3 @@
-import { authUrl } from "../constant/constant.js";
-
 export default async function getToken() {
   const username = "qa@brikl.io";
   const password = "QAforBrikL@1";
@@ -7,7 +5,7 @@ export default async function getToken() {
   const client_secret =
     "MJmSILWIOw34riSts8DgXR0gytNWR7uvfeocU1dLojDJQG0GOkwaR3bTrdbAi_qU";
   const audience = "https://dev.api.brikl.com";
-  const rsp = await fetch(`${authUrl}/oauth/token`, {
+  const rsp = await fetch(`/api/oauth/token`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
