@@ -26,6 +26,10 @@ export default function reducer(state, action) {
   if (action.type === actionName.SHOW_LOADMORE) {
     return { ...state, showLoadMore: true };
   }
+  if (action.type === actionName.HIDE_LOADMORE) {
+    return { ...state, showLoadMore: false };
+  }
+
   if (action.type === actionName.RUN_LOADING_LOADMORE) {
     return { ...state, isLoadingforMore: true };
   }

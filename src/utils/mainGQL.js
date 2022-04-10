@@ -37,6 +37,7 @@ const deleteProductGQL = async (formState, productID) => {
 };
 
 export const requestGQLs = async (formState, dispatch) => {
+  console.log("run manual OBE");
   const createProductResponse = await createProductGQL(formState);
   if (createProductResponse.success) {
     const { id: productID } = createProductResponse.data.createProduct;

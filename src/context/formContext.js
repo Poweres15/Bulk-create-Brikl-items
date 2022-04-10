@@ -2,6 +2,9 @@ import React, { useReducer, useCallback, useEffect, useRef } from "react";
 import { actionName } from "../constant/constant";
 import reducer from "../reducer/formReducer";
 import fetchLoadmore from "../utils/loadMoreGQL";
+import getToken from "../utils/getToken.js";
+import shops from "../constant/shop";
+import fetchLoadmoreNBE from "../utils/loadMoreGQLNBE";
 
 const FormContext = React.createContext();
 const getDataStorage = () => {
@@ -9,10 +12,16 @@ const getDataStorage = () => {
   if (authData) {
     return JSON.parse(localStorage.getItem("authData"));
   }
-  return { shopid: "", token: "" };
+
+  return { token: "" };
+};
+
+window.onbeforeunload = () => {
+  localStorage.removeItem("authData");
 };
 
 const init = {
+  shopid: "",
   internalID: "",
   nameUS: "",
   price: "",
@@ -25,6 +34,7 @@ const init = {
   selectedOption: "",
   allSaleChannel: [],
   selectedSF: "",
+  be: "",
 };
 const FormProvider = ({ children }) => {
   const isMount = useRef(true);
@@ -42,7 +52,19 @@ const FormProvider = ({ children }) => {
   const resetFormstate = () => {
     dispatch({
       type: actionName.RESET_FORM_STATE,
-      payload: init,
+      payload: { ...init, shopid: formState.shopid, be: formState.be },
+    });
+  };
+
+  const handleChangeShop = (e) => {
+    const { id, be } = shops.find((shop) => shop.id === e.target.value);
+    dispatch({
+      type: actionName.UPDATE_VALUE,
+      payload: { key: "shopid", value: id },
+    });
+    dispatch({
+      type: actionName.UPDATE_VALUE,
+      payload: { key: "be", value: be },
     });
   };
 
@@ -73,7 +95,9 @@ const FormProvider = ({ children }) => {
     e.preventDefault();
     dispatch({ type: actionName.REMOVE_ERR_LOADMORE });
     dispatch({ type: actionName.RUN_LOADING_LOADMORE });
-    await fetchLoadmore(formState, dispatch);
+    formState.be === "OBE"
+      ? await fetchLoadmore(formState, dispatch)
+      : await fetchLoadmoreNBE(formState, dispatch);
     dispatch({ type: actionName.STOP_LOADING_LOADMORE });
   };
 
@@ -91,11 +115,30 @@ const FormProvider = ({ children }) => {
   }, [formState.isLoadingforMore]);
 
   useEffect(() => {
-    localStorage.setItem(
-      "authData",
-      JSON.stringify({ shopid: formState.shopid, token: formState.token })
-    );
-  }, [formState.shopid, formState.token]);
+    dispatch({
+      type: actionName.RESET_FORM_STATE,
+      payload: {
+        ...init,
+        shopid: formState.shopid,
+        be: formState.be,
+        token: formState.token,
+      },
+    });
+  }, [formState.shopid]);
+
+  useEffect(() => {
+    const generateToken = async () => {
+      const accessToken = await getToken();
+      dispatch({
+        type: actionName.UPDATE_VALUE,
+        payload: { key: "token", value: accessToken },
+      });
+      localStorage.setItem("authData", JSON.stringify({ token: accessToken }));
+    };
+    if (formState.token.length === 0) {
+      generateToken();
+    }
+  }, [formState.token]);
 
   return (
     <FormContext.Provider
@@ -105,6 +148,7 @@ const FormProvider = ({ children }) => {
         handleLoadmoreOption,
         handleChangeVariant,
         resetFormstate,
+        handleChangeShop,
       }}
     >
       {children}

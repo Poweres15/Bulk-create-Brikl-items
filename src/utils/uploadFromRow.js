@@ -8,6 +8,7 @@ export const uploadProductFromRow = async (
   addErrorMsgInResult,
   rowNumber
 ) => {
+  console.log("Bulk OBE run");
   return new Promise(async (resolve) => {
     let { isActive } = rowObject;
     isActive = isActive === "TRUE" ? "ACTIVE" : "INACTIVE";

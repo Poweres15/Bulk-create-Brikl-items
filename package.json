@@ -1,5 +1,6 @@
 {
   "name": "bulk-create",
+  "proxy": "https://dev.auth.brikl.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

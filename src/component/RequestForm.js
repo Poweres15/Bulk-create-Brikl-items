@@ -5,13 +5,15 @@ import styled from "styled-components";
 import { FormContext } from "../context/formContext";
 import ManualMethod from "./ManualMethod";
 import BulkUpload from "./BulkUpload";
+import CleanUpMode from "./CleanUpMode";
 
 const RequestForm = () => {
-  const [isBulkMethod, setBulkMethod] = useState(false);
+  const [mode, setMode] = useState("single");
   const { handleSubmit } = React.useContext(UploadContext);
   const {
     formState,
     handleChange,
+    handleChangeShop,
     handleLoadmoreOption,
     handleChangeVariant,
     resetFormstate,
@@ -21,37 +23,55 @@ const RequestForm = () => {
     <Wrapper onSubmit={handleSubmit}>
       <div className="method-group">
         <button
-          className={!isBulkMethod ? "active" : ""}
+          className={mode === "single" ? "active" : ""}
           type="button"
           onClick={() => {
-            setBulkMethod(false);
+            setMode("single");
           }}
         >
           Single Method
         </button>
         <button
-          className={isBulkMethod ? "active" : ""}
+          className={mode === "bulk" ? "active" : ""}
           type="button"
           onClick={() => {
-            setBulkMethod(true);
+            setMode("bulk");
           }}
         >
           Bulk Method
         </button>
+        <button
+          type="button"
+          className={mode === "clean" ? "active" : ""}
+          onClick={() => {
+            setMode("clean");
+          }}
+        >
+          Clean E2E data
+        </button>
       </div>
 
-      <StepOne shopid={shopid} token={token} handleChange={handleChange} />
-
-      {isBulkMethod ? (
-        <BulkUpload />
+      {mode === "clean" ? (
+        <CleanUpMode token={token} />
       ) : (
-        <ManualMethod
-          handleChange={handleChange}
-          handleLoadmoreOption={handleLoadmoreOption}
-          handleChangeVariant={handleChangeVariant}
-          resetFormstate={resetFormstate}
-          formState={formState}
-        />
+        <>
+          <StepOne
+            shopid={shopid}
+            token={token}
+            handleChange={handleChangeShop}
+          />
+          {mode === "bulk" ? (
+            <BulkUpload />
+          ) : (
+            <ManualMethod
+              handleChange={handleChange}
+              handleLoadmoreOption={handleLoadmoreOption}
+              handleChangeVariant={handleChangeVariant}
+              resetFormstate={resetFormstate}
+              formState={formState}
+            />
+          )}
+        </>
       )}
     </Wrapper>
   );

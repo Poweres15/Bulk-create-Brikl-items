@@ -1,4 +1,5 @@
 const oldBeUrl = "https://dev.api.mybrikl.com/graphql";
+const NBEUrl = "https://dev.internal-api.brikl.com/v1/graphql";
 
 export const queryName = {
   GET_PRODUCT: "getProduct",
@@ -10,6 +11,13 @@ export const queryName = {
   GET_SHOP_VARIANT: "getShopVariantOptions",
   GET_SHOP_STOREFRONT: "getShopSalesChannels",
   ADD_ITEM_SALE_CHANNEL: "createProductSalesChannel",
+  GET_SHOP_VARIANT_NBE: "dashboardGetAllProductOptions",
+  GET_SHOP_STOREFRONT_NBE: "searchDashboardSalesChannelsNB",
+  CREATE_PRODUCT_NBE: "dashboardCreateProductsNB",
+  ADD_VARIANT_NBE: "dashboardAssignProductOptionValues",
+  ADD_SHOP_STOREFRONT_NBE: "addDashboardProductToSalesChannelNB",
+  GET_LIGHT_NBE: "getDashboardLightPresetsNBE",
+  DELETE_LIGHT_NBE: "deleteDashboardProductLightPresetNBE",
 };
 
 export const actionName = {
@@ -25,6 +33,7 @@ export const actionName = {
   ADD_ALL_VARIANTS: "addAllVariants",
   SELECT_VARIANT: "selectedVarant",
   SHOW_LOADMORE: "showLoadMore",
+  HIDE_LOADMORE: "hideLoadMore",
   RUN_LOADING_LOADMORE: "runLoadingLoadMore",
   STOP_LOADING_LOADMORE: "stopLoadingLoadMore",
   ADD_ALL_SALE_CHANNEL: "addAllSaleChannels",
@@ -147,5 +156,101 @@ salesChannels {
 }
 `,
     urlEndPoint: oldBeUrl,
+  },
+  dashboardGetAllProductOptions: {
+    query: `query dashboardGetAllProductOptions($first: Int, $before: String, $last: Int, $after: String) {
+  productOptions(first: $first, before: $before, last: $last, after: $after) {
+    edges {
+      node {
+        id
+        internalId
+        defaultTitle
+        type
+        values {
+          id
+          productOptionId
+          value
+          defaultTitle
+        }
+      }
+    }
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+  searchDashboardSalesChannelsNB: {
+    query: `query searchDashboardSalesChannelsNB($keyword: String!, $after: String, $first: Int = 100) {
+  searchSalesChannels(keyword: $keyword, first: $first, after: $after) {
+    totalCount
+    edges {
+      node {
+        id
+        name
+        type
+        storeFront {
+          id
+          title
+          logo
+        }
+        teamStore {
+          id
+          title
+          logo
+        }
+      }
+    }
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+
+  dashboardCreateProductsNB: {
+    query: `mutation dashboardCreateProductsNB ($input: CreateProductInput!){
+  createProduct(input:$input) {
+    id
+    __typename
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+
+  dashboardAssignProductOptionValues: {
+    query: `mutation dashboardAssignProductOptionValues($id: ID!, $options: [AssignProductOptionsOptionInput!]!) {
+  assignProductOptions(productId: $id, input: {productOptions: $options}) {
+    id
+    internalId
+    defaultTitle
+    type
+    __typename
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+  addDashboardProductToSalesChannelNB: {
+    query: `mutation addDashboardProductToSalesChannelNB($salesChannelId: ID!, $productId: ID!) {
+  addProductToSalesChannel(salesChannelId: $salesChannelId, productId: $productId) {
+    id
+    __typename
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+  getDashboardLightPresetsNBE: {
+    query: `query getDashboardLightPresetsNBE {
+  productLightPresets {
+   id
+  title
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+  deleteDashboardProductLightPresetNBE: {
+    query: `mutation deleteDashboardProductLightPresetNBE($id: ID!) {
+  deleteProductLightPreset(id: $id) {
+    success
+    __typename
+  }
+}`,
+    urlEndPoint: NBEUrl,
   },
 };

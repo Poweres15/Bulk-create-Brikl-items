@@ -9,6 +9,7 @@ import { requestGQLs } from "../utils/mainGQL";
 import reducer from "../reducer/uploadReducer";
 import { FormContext } from "./formContext";
 import { actionName } from "../constant/constant";
+import { uploadManualNBE } from "../utils/uploadManualNBE";
 
 const UploadContext = React.createContext();
 
@@ -32,7 +33,9 @@ const UploadProvider = ({ children }) => {
 
     dispatch({ type: actionName.RUN_LOADING });
     dispatch({ type: actionName.CLEAR_MESSAGE });
-    await requestGQLs(formState, dispatch);
+    formState.be === "OBE"
+      ? await requestGQLs(formState, dispatch)
+      : await uploadManualNBE(formState, dispatch);
     dispatch({ type: actionName.STOP_LOADING });
   };
 

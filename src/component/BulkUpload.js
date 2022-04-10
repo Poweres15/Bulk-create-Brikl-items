@@ -5,6 +5,7 @@ import {
 } from "../utils/googleSheet";
 import { FormContext } from "../context/formContext";
 import { uploadProductFromRow } from "../utils/uploadFromRow";
+import uploadProductFromRowNBE from "../utils/uploadFromRowNBE";
 import ResultTable from "./ResultTable";
 import { SiGooglesheets } from "react-icons/si";
 import styled from "styled-components";
@@ -68,19 +69,17 @@ const BulkUpload = () => {
   };
 
   const upLoadAllProduct = async (rows, formState) => {
-    const { token, shopid } = formState;
+    const { token, shopid, be } = formState;
     const rowLength = rows.length > 5 ? 5 : rows.length;
+    const uploadmethod =
+      be === "OBE" ? uploadProductFromRow : uploadProductFromRowNBE;
     const promiseArray = [];
     for (let i = 0; i < rowLength; i++) {
       setUploadResult((prev) => {
         return { ...prev, [i]: [] };
       });
       promiseArray.push(
-        uploadProductFromRow(
-          { ...rows[i], token, shopid },
-          addErrorMsgInResult,
-          i
-        )
+        uploadmethod({ ...rows[i], token, shopid }, addErrorMsgInResult, i)
       );
     }
     return promiseArray;

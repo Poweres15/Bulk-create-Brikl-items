@@ -15,7 +15,6 @@ const BriklGQL = async (queryName, token, shopId, variable) => {
         variables: variable,
       }),
     });
-
     if (response.status !== 200) {
       console.log(response.status);
       throw new Error("Error Found");
