@@ -1,5 +1,6 @@
 const oldBeUrl = "https://dev.api.mybrikl.com/graphql";
 const NBEUrl = "https://dev.internal-api.brikl.com/v1/graphql";
+export const authUrl = "https://dev.auth.brikl.com";
 
 export const queryName = {
   GET_PRODUCT: "getProduct",
