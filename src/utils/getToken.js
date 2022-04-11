@@ -1,9 +1,9 @@
 export default async function getToken() {
-  const username = REACT_APP_USERNAME;
-  const password = REACT_APP_PASSWORD;
-  const client_id = REACT_APP_CLIENT_ID;
-  const client_secret = REACT_APP_CLIENT_SECRET;
-  const audience = REACT_APP_AUDIENCE;
+  const username = process.env.REACT_APP_USERNAME;
+  const password = process.env.REACT_APP_PASSWORD;
+  const client_id = process.env.REACT_APP_CLIENT_ID;
+  const client_secret = process.env.REACT_APP_CLIENT_SECRET;
+  const audience = process.env.REACT_APP_AUDIENCE;
 
   const rsp = await fetch(`/oauth/token`, {
     method: "POST",
