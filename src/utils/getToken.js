@@ -1,10 +1,9 @@
 export default async function getToken() {
-  const username = "qa@brikl.io";
-  const password = "QAforBrikL@1";
-  const client_id = "ooh45L7WXHuQlvQFB39nnXLrXpl4EJN5";
-  const client_secret =
-    "MJmSILWIOw34riSts8DgXR0gytNWR7uvfeocU1dLojDJQG0GOkwaR3bTrdbAi_qU";
-  const audience = "https://dev.api.brikl.com";
+  const username = REACT_APP_USERNAME;
+  const password = REACT_APP_PASSWORD;
+  const client_id = REACT_APP_CLIENT_ID;
+  const client_secret = REACT_APP_CLIENT_SECRET;
+  const audience = REACT_APP_AUDIENCE;
 
   const rsp = await fetch(`/oauth/token`, {
     method: "POST",
