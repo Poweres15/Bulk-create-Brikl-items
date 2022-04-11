@@ -7,6 +7,8 @@ export async function initiatlGoogleShee() {
   const doc = new GoogleSpreadsheet(
     "1VayqQAGlFq0mNJ2HCinGzPJWUhqmrNTTajL_asWzkVs"
   );
+  console.log(process.env.REACT_APP_GOOGLE_SERVICE_ACCOUNT_EMAIL);
+  console.log(process.env.REACT_APP_GOOGLE_PRIVATE_KEY);
 
   // Initialize Auth - see https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
   await doc.useServiceAccountAuth({
@@ -15,6 +17,7 @@ export async function initiatlGoogleShee() {
     client_email: process.env.REACT_APP_GOOGLE_SERVICE_ACCOUNT_EMAIL,
     private_key: process.env.REACT_APP_GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
   });
+
   await doc.loadInfo();
 
   return doc;
