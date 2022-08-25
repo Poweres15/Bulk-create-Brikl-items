@@ -136,6 +136,7 @@ const FormProvider = ({ children }) => {
       localStorage.setItem("authData", JSON.stringify({ token: accessToken }));
     };
     if (formState.token.length === 0) {
+      console.log("generatet token");
       generateToken();
     }
   }, [formState.token]);

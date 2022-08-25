@@ -1,7 +1,6 @@
 import { queryInfo } from "../constant/constant";
 
 const BriklGQL = async (queryName, token, shopId, variable) => {
-  console.log("token", token);
   try {
     const response = await fetch(queryInfo[queryName].urlEndPoint, {
       method: "POST",
@@ -16,7 +15,6 @@ const BriklGQL = async (queryName, token, shopId, variable) => {
         variables: variable,
       }),
     });
-    console.log("resp", response);
     if (response.status !== 200) {
       console.log(response.status);
       throw new Error("Error Found");
