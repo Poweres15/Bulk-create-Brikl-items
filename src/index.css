@@ -38,6 +38,18 @@ main {
   color: white;
 }
 
+.dangerbtn {
+  transition-duration: 0.4s;
+  background-color: white;
+  color: #a81717;
+  border: 2px solid #a81717;
+}
+
+.dangerbtn:hover {
+  background-color: #a81717; /* Green */
+  color: white;
+}
+
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */

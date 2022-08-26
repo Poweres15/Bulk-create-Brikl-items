@@ -29,7 +29,7 @@ const StepOne = ({ shopid, token, handleChange }) => {
             Please select the Shops
           </option>
           {shops.map((shop) => {
-            const { id, be, name } = shop;
+            const { id, name } = shop;
             return (
               <option value={id} key={id}>
                 {name}

@@ -112,6 +112,7 @@ const FormProvider = ({ children }) => {
         type: actionName.SHOW_LOADMORE,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState.isLoadingforMore]);
 
   useEffect(() => {
@@ -124,6 +125,7 @@ const FormProvider = ({ children }) => {
         token: formState.token,
       },
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState.shopid]);
 
   useEffect(() => {

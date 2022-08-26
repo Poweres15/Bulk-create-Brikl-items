@@ -1,4 +1,4 @@
-import { queryName, actionName } from "../constant/constant";
+import { queryName } from "../constant/constant";
 import optionalDetailGQLNBE from "./optionalNBEGQL";
 import BriklGQL from "./baesGQL";
 

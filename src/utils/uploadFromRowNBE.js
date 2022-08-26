@@ -1,6 +1,6 @@
 import { createProductNBE } from "./uploadManualNBE";
 import BriklGQL from "./baesGQL";
-import { queryName, actionName } from "../constant/constant";
+import { queryName } from "../constant/constant";
 
 const uploadProductFromRowNBE = async (
   rowObject,

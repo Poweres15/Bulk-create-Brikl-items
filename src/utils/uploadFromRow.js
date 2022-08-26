@@ -1,6 +1,6 @@
 import { createProductGQL } from "./mainGQL";
 import BriklGQL from "./baesGQL";
-import { queryName, actionName } from "../constant/constant";
+import { queryName } from "../constant/constant";
 
 //Main Function ##################################################
 export const uploadProductFromRow = async (

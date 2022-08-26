@@ -54,6 +54,7 @@ const UploadProvider = ({ children }) => {
     dispatch({
       type: actionName.SHOW_MESSAGE,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadState.isLoading]);
 
   return (

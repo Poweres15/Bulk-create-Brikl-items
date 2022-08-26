@@ -28,13 +28,13 @@ export const createProductGQL = async (formState) => {
   });
 };
 
-const deleteProductGQL = async (formState, productID) => {
-  const { token, shopid } = formState;
+// const deleteProductGQL = async (formState, productID) => {
+//   const { token, shopid } = formState;
 
-  return await BriklGQL(queryName.DELETE_PRODUCT, token, shopid, {
-    id: productID,
-  });
-};
+//   return await BriklGQL(queryName.DELETE_PRODUCT, token, shopid, {
+//     id: productID,
+//   });
+// };
 
 export const requestGQLs = async (formState, dispatch) => {
   console.log("run manual OBE");

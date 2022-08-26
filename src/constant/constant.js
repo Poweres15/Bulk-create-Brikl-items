@@ -19,6 +19,7 @@ export const queryName = {
   ADD_SHOP_STOREFRONT_NBE: "addDashboardProductToSalesChannelNB",
   GET_LIGHT_NBE: "getDashboardLightPresetsNBE",
   DELETE_LIGHT_NBE: "deleteDashboardProductLightPresetNBE",
+  GET_PRODUCT_NBE: "dashboardGetProductsNB",
 };
 
 export const actionName = {
@@ -249,6 +250,59 @@ salesChannels {
     query: `mutation deleteDashboardProductLightPresetNBE($id: ID!) {
   deleteProductLightPreset(id: $id) {
     success
+    __typename
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+
+  dashboardGetProductsNB: {
+    query: `query dashboardGetProductsNB(
+  $filter: ProductsFilterInput!
+  $first: Int
+  $before: String
+  $last: Int
+  $after: String
+) {
+  products(
+    filter: $filter
+    first: $first
+    before: $before
+    last: $last
+    after: $after
+  ) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+      __typename
+    }
+    edges {
+      node {
+        id
+        defaultTitle
+        internalId
+        thumbnailUrl
+        type
+        status
+        salesChannels {
+          id
+          name
+          teamStore {
+            title
+            __typename
+          }
+          storeFront {
+            title
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
     __typename
   }
 }`,

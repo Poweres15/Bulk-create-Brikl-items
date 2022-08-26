@@ -1,9 +1,9 @@
 const shops = [
-  {
-    name: "LG Dev",
-    be: "OBE",
-    id: "667674bf-c3f8-4444-8127-29c77c7e6530",
-  },
+  // {
+  //   name: "LG Dev",
+  //   be: "OBE",
+  //   id: "667674bf-c3f8-4444-8127-29c77c7e6530",
+  // },
   {
     name: "backend-migration",
     be: "NBE",

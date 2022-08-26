@@ -6,6 +6,7 @@ import { FormContext } from "../context/formContext";
 import ManualMethod from "./ManualMethod";
 import BulkUpload from "./BulkUpload";
 import CleanUpMode from "./CleanUpMode";
+import DeleteProduct from "./DeleteProduct";
 
 const RequestForm = () => {
   const [mode, setMode] = useState("single");
@@ -40,7 +41,7 @@ const RequestForm = () => {
         >
           Bulk Method
         </button>
-        <button
+        {/* <button
           type="button"
           className={mode === "clean" ? "active" : ""}
           onClick={() => {
@@ -48,7 +49,18 @@ const RequestForm = () => {
           }}
         >
           Clean E2E data
-        </button>
+        </button> */}
+        {formState.token.length > 0 && (
+          <button
+            type="button"
+            className={mode === "delete" ? "active" : ""}
+            onClick={() => {
+              setMode("delete");
+            }}
+          >
+            Delete Product
+          </button>
+        )}
       </div>
 
       {mode === "clean" ? (
@@ -60,9 +72,9 @@ const RequestForm = () => {
             token={token}
             handleChange={handleChangeShop}
           />
-          {mode === "bulk" ? (
-            <BulkUpload />
-          ) : (
+          {mode === "bulk" && <BulkUpload />}
+          {mode === "delete" && <DeleteProduct />}
+          {mode === "single" && (
             <ManualMethod
               handleChange={handleChange}
               handleLoadmoreOption={handleLoadmoreOption}
@@ -78,7 +90,7 @@ const RequestForm = () => {
 };
 
 const Wrapper = styled.form`
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   column-gap: 1rem;

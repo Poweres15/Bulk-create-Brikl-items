@@ -41,6 +41,7 @@ const BulkUpload = () => {
       }
     };
     authorizedGoogleSheet();
+    return () => {};
   }, []);
 
   const handleUpload = async () => {
@@ -57,6 +58,7 @@ const BulkUpload = () => {
     if (!isLoading && Object.keys(uploadResult).length !== 0) {
       setResultShow(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   const addErrorMsgInResult = (msg, rowIndex) => {
