@@ -21,6 +21,7 @@ export const queryName = {
   DELETE_LIGHT_NBE: "deleteDashboardProductLightPresetNBE",
   GET_PRODUCT_NBE: "dashboardGetProductsNB",
   DELETE_PEODUCT_NBE: "dashboardDeleteProductByIdNB",
+  SEARCH_PRODUCT_NBE: "searchDashboardProductsNB",
 };
 
 export const actionName = {
@@ -313,6 +314,35 @@ salesChannels {
     query: `mutation dashboardDeleteProductByIdNB($id: ID!) {
   deleteProduct(id: $id) {
     success
+    __typename
+  }
+}`,
+    urlEndPoint: NBEUrl,
+  },
+
+  searchDashboardProductsNB: {
+    query: `query searchDashboardProductsNB(
+  $keyword: String!
+  $filter: ProductsFilterInput
+  $first: Int
+) {
+  products(query: $keyword, filter: $filter, first: $first) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+      __typename
+    }
+    edges {
+      node {
+        id
+        defaultTitle
+        thumbnailUrl
+        __typename
+      }
+      __typename
+    }
     __typename
   }
 }`,

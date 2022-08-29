@@ -21,3 +21,11 @@ export const loadMoreProduct = async (formState, endCursor) => {
     after: endCursor,
   });
 };
+
+export const searchProduct = async (formState, searchTerm) => {
+  const { token, shopid } = formState;
+  return await BriklGQL(queryName.SEARCH_PRODUCT_NBE, token, shopid, {
+    keyword: searchTerm,
+    first: 100,
+  });
+};
