@@ -46,7 +46,7 @@ const DeleteTable = ({
                       value={id}
                     />
                   </td>
-                  <td>{status}</td>
+                  <td>{status || "-"}</td>
                   <td>{internalId || "-"}</td>
                   <td>{defaultTitle}</td>
                 </tr>
