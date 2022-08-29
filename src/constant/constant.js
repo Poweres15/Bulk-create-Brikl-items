@@ -338,7 +338,10 @@ salesChannels {
       node {
         id
         defaultTitle
+        internalId
         thumbnailUrl
+        type
+        status
         __typename
       }
       __typename
