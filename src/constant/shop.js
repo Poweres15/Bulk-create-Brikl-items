@@ -14,6 +14,11 @@ const shops = [
     be: "NBE",
     id: "3ddd1f77-23b5-4bc7-9059-c32cc1338723",
   },
+  {
+    name: "base-shop",
+    be: "NBE",
+    id: "b8a502ca-c2fe-4856-9352-70a6978878c5",
+  },
 ];
 
 export default shops;
